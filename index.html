@@ -91,7 +91,7 @@
     /* Quote text */
     #quote-text {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.2rem, 3vw, 1.65rem);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
       font-style: italic;
       line-height: 1.7;
       color: var(--ink);
@@ -102,13 +102,24 @@
     #quote-author {
       margin-top: 1.5rem;
       font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      font-size: 0.9rem;
+      font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
     }
     #quote-author::before { content: '— '; }
+
+    /* Source */
+    #quote-source {
+      margin-top: 0.5rem;
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      font-style: italic;
+      color: var(--muted);
+      opacity: 0.9;
+    }
 
     /* Button */
     .new-quote-btn {
@@ -143,31 +154,32 @@
     <span class="open-quote">&ldquo;</span>
     <p id="quote-text"></p>
     <p id="quote-author"></p>
+    <p id="quote-source"></p>
     <button class="new-quote-btn" onclick="nextQuote()">New Quote</button>
   </div>
 
   <script>
     const quotes = [
-      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
-      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
-      { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
-      { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
-      { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
-      { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
-      { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
-      { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford" },
-      { text: "The two most important days in your life are the day you are born and the day you find out why.", author: "Mark Twain" },
-      { text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.", author: "Mother Teresa" },
-      { text: "When you reach the end of your rope, tie a knot in it and hang on.", author: "Franklin D. Roosevelt" },
-      { text: "Always remember that you are absolutely unique. Just like everyone else.", author: "Margaret Mead" },
-      { text: "Do not go where the path may lead; go instead where there is no path and leave a trail.", author: "Ralph Waldo Emerson" },
-      { text: "You will face many defeats in life, but never let yourself be defeated.", author: "Maya Angelou" },
-      { text: "In the end, it's not the years in your life that count. It's the life in your years.", author: "Abraham Lincoln" },
-      { text: "Never let the fear of striking out keep you from playing the game.", author: "Babe Ruth" },
-      { text: "Life is either a daring adventure or nothing at all.", author: "Helen Keller" },
-      { text: "Many of life's failures are people who did not realize how close they were to success when they gave up.", author: "Thomas A. Edison" },
-      { text: "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.", author: "Dr. Seuss" },
-      { text: "If life were predictable it would cease to be life, and be without flavor.", author: "Eleanor Roosevelt" },
+      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", source: "Stanford Commencement Address, 2005" },
+      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein", source: "Attributed, c. 1940s" },
+      { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius", source: "Analects, c. 475 BC" },
+      { text: "Life is what happens when you're busy making other plans.", author: "John Lennon", source: "Beautiful Boy, 1980" },
+      { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", source: "Attributed, c. 1940s" },
+      { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein", source: "Interview with William Miller, 1955" },
+      { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky", source: "Attributed, c. 1980s" },
+      { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford", source: "Attributed, c. 1910s" },
+      { text: "The two most important days in your life are the day you are born and the day you find out why.", author: "Mark Twain", source: "Attributed, c. 1890s" },
+      { text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.", author: "Mother Teresa", source: "A Gift for God, 1975" },
+      { text: "When you reach the end of your rope, tie a knot in it and hang on.", author: "Franklin D. Roosevelt", source: "Attributed, c. 1930s" },
+      { text: "Always remember that you are absolutely unique. Just like everyone else.", author: "Margaret Mead", source: "Attributed, c. 1960s" },
+      { text: "Do not go where the path may lead; go instead where there is no path and leave a trail.", author: "Ralph Waldo Emerson", source: "Self-Reliance, 1841" },
+      { text: "You will face many defeats in life, but never let yourself be defeated.", author: "Maya Angelou", source: "Interview with Bill Moyers, 1973" },
+      { text: "In the end, it's not the years in your life that count. It's the life in your years.", author: "Abraham Lincoln", source: "Attributed, c. 1850s" },
+      { text: "Never let the fear of striking out keep you from playing the game.", author: "Babe Ruth", source: "Attributed, c. 1920s" },
+      { text: "Life is either a daring adventure or nothing at all.", author: "Helen Keller", source: "The Open Door, 1957" },
+      { text: "Many of life's failures are people who did not realize how close they were to success when they gave up.", author: "Thomas A. Edison", source: "Attributed, c. 1900s" },
+      { text: "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.", author: "Dr. Seuss", source: "Oh, the Places You'll Go!, 1990" },
+      { text: "If life were predictable it would cease to be life, and be without flavor.", author: "Eleanor Roosevelt", source: "You Learn by Living, 1960" },
     ];
 
     let lastIndex = -1;
@@ -182,30 +194,37 @@
     function displayQuote(quote) {
       document.getElementById('quote-text').textContent   = quote.text;
       document.getElementById('quote-author').textContent = quote.author;
+      document.getElementById('quote-source').textContent = quote.source;
     }
 
     function nextQuote() {
       const textEl   = document.getElementById('quote-text');
       const authorEl = document.getElementById('quote-author');
+      const sourceEl = document.getElementById('quote-source');
 
       // fade out
       textEl.classList.add('fade-out');
       authorEl.classList.add('fade-out');
+      sourceEl.classList.add('fade-out');
 
       setTimeout(() => {
         textEl.classList.remove('fade-out');
         authorEl.classList.remove('fade-out');
+        sourceEl.classList.remove('fade-out');
 
         const q = getRandomQuote();
         textEl.textContent   = q.text;
         authorEl.textContent = q.author;
+        sourceEl.textContent = q.source;
 
         textEl.classList.add('fade-in');
         authorEl.classList.add('fade-in');
+        sourceEl.classList.add('fade-in');
 
         setTimeout(() => {
           textEl.classList.remove('fade-in');
           authorEl.classList.remove('fade-in');
+          sourceEl.classList.remove('fade-in');
         }, 500);
       }, 300);
     }

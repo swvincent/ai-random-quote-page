@@ -21,6 +21,10 @@
   </div>
 
   <script>
+    const textEl   = document.getElementById('quote-text');
+    const authorEl = document.getElementById('quote-author');
+    const sourceEl = document.getElementById('quote-source');
+
     let quotes = [];
     let lastIndex = -1;
 
@@ -32,16 +36,12 @@
     }
 
     function displayQuote(quote) {
-      document.getElementById('quote-text').textContent   = quote.text;
-      document.getElementById('quote-author').textContent = quote.author;
-      document.getElementById('quote-source').textContent = quote.source;
+      textEl.textContent   = quote.text;
+      authorEl.textContent = quote.author;
+      sourceEl.textContent = quote.source;
     }
 
     function nextQuote() {
-      const textEl   = document.getElementById('quote-text');
-      const authorEl = document.getElementById('quote-author');
-      const sourceEl = document.getElementById('quote-source');
-
       // fade out
       textEl.classList.add('fade-out');
       authorEl.classList.add('fade-out');
@@ -52,10 +52,7 @@
         authorEl.classList.remove('fade-out');
         sourceEl.classList.remove('fade-out');
 
-        const q = getRandomQuote();
-        textEl.textContent   = q.text;
-        authorEl.textContent = q.author;
-        sourceEl.textContent = q.source;
+        displayQuote(getRandomQuote());
 
         textEl.classList.add('fade-in');
         authorEl.classList.add('fade-in');

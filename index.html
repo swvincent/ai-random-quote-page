@@ -17,7 +17,7 @@
     <p id="quote-text"></p>
     <p id="quote-author"></p>
     <p id="quote-source"></p>
-    <button class="new-quote-btn" onclick="nextQuote()">New Quote</button>
+    <button class="new-quote-btn">New Quote</button>
   </div>
 
   <script>
@@ -41,30 +41,25 @@
       sourceEl.textContent = quote.source;
     }
 
+    const quoteEls = [textEl, authorEl, sourceEl];
+
+    function setClass(cls, add) {
+      quoteEls.forEach(el => el.classList.toggle(cls, add));
+    }
+
     function nextQuote() {
-      // fade out
-      textEl.classList.add('fade-out');
-      authorEl.classList.add('fade-out');
-      sourceEl.classList.add('fade-out');
+      setClass('fade-out', true);
 
       setTimeout(() => {
-        textEl.classList.remove('fade-out');
-        authorEl.classList.remove('fade-out');
-        sourceEl.classList.remove('fade-out');
-
+        setClass('fade-out', false);
         displayQuote(getRandomQuote());
+        setClass('fade-in', true);
 
-        textEl.classList.add('fade-in');
-        authorEl.classList.add('fade-in');
-        sourceEl.classList.add('fade-in');
-
-        setTimeout(() => {
-          textEl.classList.remove('fade-in');
-          authorEl.classList.remove('fade-in');
-          sourceEl.classList.remove('fade-in');
-        }, 500);
+        setTimeout(() => setClass('fade-in', false), 500);
       }, 300);
     }
+
+    document.querySelector('.new-quote-btn').addEventListener('click', nextQuote);
 
     fetch('quotes.json')
       .then(r => r.json())

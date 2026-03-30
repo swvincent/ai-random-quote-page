@@ -59,14 +59,17 @@
       }, 300);
     }
 
-    document.querySelector('.new-quote-btn').addEventListener('click', nextQuote);
-
     fetch('quotes.json')
       .then(r => r.json())
       .then(data => {
         quotes = data;
         displayQuote(getRandomQuote());
+        document.querySelector('.new-quote-btn').addEventListener('click', nextQuote);
+      })
+      .catch(() => {
+        textEl.textContent = 'Failed to load quotes.';
       });
+
   </script>
 
 </body>

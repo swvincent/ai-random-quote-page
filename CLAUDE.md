@@ -18,12 +18,12 @@ python -m http.server
 
 ## Architecture
 
-Everything lives in `index.html`:
-
-- **CSS** (inline `<style>`): Dark theme using CSS custom properties (`--ink`, `--cream`, `--gold`, `--muted`). Decorative corner marks via `body::before/::after`. Card fade-in on load via `@keyframes fadeUp`.
-- **Quote data**: A `quotes` array of objects with `text`, `author`, and `source` fields. Sources include attribution context and year in parentheses.
-- **JS logic**: `getRandomQuote()` avoids repeating the last shown quote. `nextQuote()` fades out the three text elements, swaps content, then fades in. Initial quote is set by calling `displayQuote(getRandomQuote())` at the end of the script.
+- **`style.css`**: Dark theme using CSS custom properties (`--ink`, `--cream`, `--gold`, `--muted`). Decorative corner marks via `body::before/::after`. Card fade-in on load via `@keyframes fadeUp`.
+- **`quotes.json`**: Array of quote objects with `text`, `author`, and `source` fields. Sources include attribution context and year in parentheses.
+- **`index.html`**: Markup and JS logic. Loads quotes via `fetch('quotes.json')` on page load. `getRandomQuote()` avoids repeating the last shown quote. `nextQuote()` fades out the three text elements, swaps content, then fades in.
 - **External dependencies** (CDN only): Bootstrap 5.3.3 (CSS + JS bundle), Google Fonts (Playfair Display, Lato).
+
+> Because quotes are loaded via `fetch`, the page must be served over HTTP — opening `index.html` directly as a `file://` URL will fail due to CORS restrictions.
 
 ## Styling Conventions
 

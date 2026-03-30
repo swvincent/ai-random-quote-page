@@ -11,142 +11,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
 
-  <style>
-    :root {
-      --ink:   #e8e2d9;
-      --cream: #0d0d0d;
-      --gold:  #c0c0c8;
-      --muted: #d8d0c4;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      min-height: 100vh;
-      background-color: var(--cream);
-      background-image:
-        radial-gradient(ellipse at 20% 20%, rgba(192,192,200,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 80%, rgba(192,192,200,0.04) 0%, transparent 60%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Lato', sans-serif;
-      color: var(--ink);
-    }
-
-    /* Decorative corner marks */
-    body::before, body::after {
-      content: '';
-      position: fixed;
-      width: 120px; height: 120px;
-      border-color: var(--gold);
-      border-style: solid;
-      opacity: 0.35;
-      pointer-events: none;
-    }
-    body::before { top: 28px; left: 28px;  border-width: 1px 0 0 1px; }
-    body::after  { bottom: 28px; right: 28px; border-width: 0 1px 1px 0; }
-
-    /* ── Card ── */
-    .quote-card {
-      max-width: 680px;
-      width: 90%;
-      text-align: center;
-      padding: 3.5rem 3rem;
-      position: relative;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.8s ease forwards 0.15s;
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Thin rule above / below */
-    .quote-card::before,
-    .quote-card::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 0 auto;
-    }
-    .quote-card::before { margin-bottom: 2.2rem; }
-    .quote-card::after  { margin-top:    2.2rem; }
-
-    /* Opening quote mark */
-    .open-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 6rem;
-      line-height: 0.5;
-      color: var(--gold);
-      opacity: 0.55;
-      display: block;
-      margin-bottom: 1rem;
-    }
-
-    /* Quote text */
-    #quote-text {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.4rem, 3.5vw, 2rem);
-      font-style: italic;
-      line-height: 1.7;
-      color: var(--ink);
-      letter-spacing: 0.01em;
-    }
-
-    /* Author */
-    #quote-author {
-      margin-top: 1.5rem;
-      font-family: 'Lato', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    #quote-author::before { content: '— '; }
-
-    /* Source */
-    #quote-source {
-      margin-top: 0.5rem;
-      font-family: 'Lato', sans-serif;
-      font-weight: 400;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      font-style: italic;
-      color: var(--muted);
-      opacity: 0.9;
-    }
-
-    /* Button */
-    .new-quote-btn {
-      margin-top: 2.5rem;
-      padding: 0.6rem 2rem;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-family: 'Lato', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.25s, color 0.25s;
-    }
-    .new-quote-btn:hover {
-      background: var(--gold);
-      color: var(--cream);
-    }
-
-    /* Fade animation triggered via JS */
-    .fade-out { animation: fadeOut 0.3s ease forwards; }
-    .fade-in  { animation: fadeIn  0.5s ease forwards; }
-    @keyframes fadeOut { to { opacity: 0; transform: translateY(-8px); } }
-    @keyframes fadeIn  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-  </style>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
@@ -159,29 +24,7 @@
   </div>
 
   <script>
-    const quotes = [
-      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs", source: "Stanford Commencement Address (2005)" },
-      { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein", source: "Attributed (c. 1940s)" },
-      { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius", source: "Analects (c. 475 BC)" },
-      { text: "Life is what happens when you're busy making other plans.", author: "John Lennon", source: "Beautiful Boy (1980)" },
-      { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt", source: "Attributed (c. 1940s)" },
-      { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein", source: "Interview with William Miller (1955)" },
-      { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky", source: "Attributed (c. 1980s)" },
-      { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford", source: "Attributed (c. 1910s)" },
-      { text: "The two most important days in your life are the day you are born and the day you find out why.", author: "Mark Twain", source: "Attributed (c. 1890s)" },
-      { text: "Spread love everywhere you go. Let no one ever come to you without leaving happier.", author: "Mother Teresa", source: "A Gift for God (1975)" },
-      { text: "When you reach the end of your rope, tie a knot in it and hang on.", author: "Franklin D. Roosevelt", source: "Attributed (c. 1930s)" },
-      { text: "Always remember that you are absolutely unique. Just like everyone else.", author: "Margaret Mead", source: "Attributed (c. 1960s)" },
-      { text: "Do not go where the path may lead; go instead where there is no path and leave a trail.", author: "Ralph Waldo Emerson", source: "Self-Reliance (1841)" },
-      { text: "You will face many defeats in life, but never let yourself be defeated.", author: "Maya Angelou", source: "Interview with Bill Moyers (1973)" },
-      { text: "In the end, it's not the years in your life that count. It's the life in your years.", author: "Abraham Lincoln", source: "Attributed (c. 1850s)" },
-      { text: "Never let the fear of striking out keep you from playing the game.", author: "Babe Ruth", source: "Attributed (c. 1920s)" },
-      { text: "Life is either a daring adventure or nothing at all.", author: "Helen Keller", source: "The Open Door (1957)" },
-      { text: "Many of life's failures are people who did not realize how close they were to success when they gave up.", author: "Thomas A. Edison", source: "Attributed (c. 1900s)" },
-      { text: "You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose.", author: "Dr. Seuss", source: "Oh, the Places You'll Go!, 1990" },
-      { text: "If life were predictable it would cease to be life, and be without flavor.", author: "Eleanor Roosevelt", source: "You Learn by Living, 1960" },
-    ];
-
+    let quotes = [];
     let lastIndex = -1;
 
     function getRandomQuote() {
@@ -229,8 +72,12 @@
       }, 300);
     }
 
-    // Load a random quote on page load
-    displayQuote(getRandomQuote());
+    fetch('quotes.json')
+      .then(r => r.json())
+      .then(data => {
+        quotes = data;
+        displayQuote(getRandomQuote());
+      });
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
